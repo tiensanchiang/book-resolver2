@@ -1,0 +1,31 @@
+/* 多看注 */
+img.duokan-footnote {
+    width: 0.8em;
+}
+
+/* 注释条目*/
+li.duokan-footnote-item {
+    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";
+    text-align: left;
+    font-size: 1em;
+    line-height: 1.2;
+    padding: 0px;
+}
+
+a.duokan-footnote-link {
+    color: black!important;
+    text-decoration: none;
+}
+
+p.footnote-text {
+    font-size: 1em;
+    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";
+    text-align: left;
+    margin: 0;
+    line-height: 1.2;
+}
+
+ol.duokan-footnote-content {
+    padding-top: 1em;
+    border-top: #41313f solid 2px;
+}
