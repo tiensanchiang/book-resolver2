@@ -218,7 +218,7 @@ public class BookConverter {
         Element head = document.selectFirst("head");
         Element link = document.createElement("link");
 
-        link.attr("href",StringUtil.join(paths.getImageHrefPrefix(),"/note.css"));
+        link.attr("href",StringUtil.join(paths.getStyleHrefPrefix(),"/note.css"));
         link.attr("rel", "stylesheet");
         link.attr("type", "text/css");
         head.appendChild(link);

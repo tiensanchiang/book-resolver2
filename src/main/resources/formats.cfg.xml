@@ -92,6 +92,31 @@
                 </example>
             </footnote>
         </index>
+
+        <index id="idx5" >
+            <expression>
+                <![CDATA[
+                    <span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class="math-super"><a id="z4" href="part0009.xhtml#bz4">4</a></span> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="span" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="zhusi"><a id="bz6" href="part0007.xhtml#z6">[6]</a>L.Alfenus Varus，继波利欧任阿尔卑斯山南高卢总督，总司该区没收土地的工作。</p>]]>
+                </example>
+            </footnote>
+        </index>
     </indices>
 
 </formats>

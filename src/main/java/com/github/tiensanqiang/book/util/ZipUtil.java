@@ -110,14 +110,20 @@ public class ZipUtil{
             FileInputStream fos = new FileInputStream(sourceFile);
             BufferedInputStream bis = new BufferedInputStream(fos);
 
-            int tag;
+//            int tag;
             System.out.println(base);
             //将源文件写入到zip文件中
-            while ((tag = bis.read()) != -1) {
-                bos.write(tag);
+//            while ((tag = bis.read()) != -1) {
+//                bos.write(tag);
+//            }
+            int len;
+            byte [] buffer = new byte[1024*8];
+            while((len = bis.read(buffer,0,buffer.length)) > 0){
+                bos.write(buffer,0,len);
             }
             bis.close();
             fos.close();
+            bos.flush();
 
         }
     }
