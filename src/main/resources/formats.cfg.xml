@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <formats>
     <indices>
-        <index id="idx1" selector="sup" footnote="ft1">
+        <index id="idx1" >
             <expression>
                 <![CDATA[
                     <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
@@ -11,13 +11,20 @@
                 <![CDATA[ <a id="w2"></a> <a href="text00006.html#m2"> <sup>[2]</sup> </a> ]]>
             </example>
             <doms>
-                <dom tag-name="a" attr="id" remove="true" />
+                <dom tag-name="a" attr="id" remove="true"/>
                 <dom tag-name="a" rel="nextElementSibling" attr="href" remove="true" append="true"/>
-                <dom tag-name="sup" rel="$sup" />
+                <dom tag-name="sup" rel="nextElementSibling.$sup"/>
             </doms>
+            <footnote id="ft1">
+                <doms>
+                    <dom tag-name="a" attr="id"/>
+                    <dom tag-name="p" rel="parent" remove="true" text="true"/>
+                    <dom tag-name="a" rel="nextElementSibling" attr="href"/>
+                </doms>
+            </footnote>
         </index>
 
-        <index id="idx2" selector="sup" footnote="ft2">
+        <index id="idx2" >
             <expression>
                 <![CDATA[
                     <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
@@ -27,12 +34,19 @@
                 <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
             </example>
             <doms>
-                <dom tag-name="a"  attr="id,href" remove="true" append="true"/>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
                 <dom tag-name="sup" text="true" rel="$sup"/>
             </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="id,href"/>
+                    <dom tag-name="p" rel="parent" remove="true" text="true"/>
+                </doms>
+            </footnote>
         </index>
 
-        <index id="idx3" selector="sup" footnote="ft3">
+        <index id="idx3" >
             <expression>
                 <![CDATA[
                     <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
@@ -45,32 +59,39 @@
                 <dom tag-name="sup" text="true"/>
                 <dom tag-name="a" rel="parent" attr="href" remove="true" append="true"/>
             </doms>
+
+            <footnote id="ft3">
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true"/>
+                    <dom tag-name="a" rel="$a" remove="true" text="true"/>
+                </doms>
+            </footnote>
         </index>
 
+        <index id="idx4" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="kindle-cn-footnote" id="ft28"><a href="part0012.xhtml#fn28">[28]</a>蹊跷（qī qiāo)：也作“跷蹊”。希奇古怪。</p>]]>
+                </example>
+            </footnote>
+        </index>
     </indices>
-
-    <footnotes>
-         <footnote id="ft1">
-            <doms>
-                <dom tag-name="a" attr="id"/>
-                <dom tag-name="p" rel="parent" remove="true" text="true"/>
-                <dom tag-name="a" rel="nextElementSibling" attr="href"/>
-            </doms>
-        </footnote>
-
-         <footnote id="ft2">
-            <doms>
-                <dom tag-name="a" attr="id,href" />
-                <dom tag-name="p" rel="parent" remove="true" text="true"/>
-            </doms>
-        </footnote>
-
-        <footnote id="ft3">
-            <doms>
-                <dom tag-name="p" attr="id" remove="true" text="true"/>
-                <dom tag-name="a" rel="$a" remove="true" text="true"/>
-            </doms>
-        </footnote>
-    </footnotes>
 
 </formats>

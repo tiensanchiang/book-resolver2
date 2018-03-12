@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class IndexFormat {
     private String id;
-    private String selector;
     private String expression;
     private Pattern pattern;
     private String example;
@@ -14,13 +13,6 @@ public class IndexFormat {
 
     private List<FormatDom> doms;
 
-    public String getSelector() {
-        return selector;
-    }
-
-    public void setSelector(String selector) {
-        this.selector = selector;
-    }
 
     public String getExpression() {
         return expression;

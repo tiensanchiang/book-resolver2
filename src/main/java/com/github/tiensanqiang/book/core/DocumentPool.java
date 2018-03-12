@@ -1,8 +1,9 @@
 package com.github.tiensanqiang.book.core;
 
+import org.apache.commons.io.IOUtils;
 import org.jsoup.nodes.Document;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -47,7 +48,12 @@ public class DocumentPool implements Serializable{
         Set<String> keys = map.keySet();
 
         for(String key : keys){
-
+            Document document = map.get(key);
+            try(OutputStream os = new FileOutputStream(new File(document.location()))){
+                IOUtils.write(document.toString(),os,"UTF-8");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
     }
 

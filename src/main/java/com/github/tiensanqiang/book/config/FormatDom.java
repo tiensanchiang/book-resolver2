@@ -4,7 +4,7 @@ public class FormatDom {
 
     private String tagName;
     private String relation;
-    private String attr;
+    private String [] attr;
     private boolean textual;
     private boolean removable;
     private boolean appendable;
@@ -26,12 +26,12 @@ public class FormatDom {
         this.relation = relation;
     }
 
-    public String getAttr() {
+    public String [] getAttr() {
         return attr;
     }
 
     public void setAttr(String attr) {
-        this.attr = attr;
+        this.attr = attr==null?new String[0]:attr.split(",");
     }
 
     public boolean isTextual() {

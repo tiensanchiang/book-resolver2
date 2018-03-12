@@ -13,8 +13,6 @@ import java.util.List;
 public class NoteFormat {
 
     private List<IndexFormat> indices;
-    private List<FootNoteFormat> footnotes;
-
 
     public static NoteFormat format;
 
@@ -35,7 +33,6 @@ public class NoteFormat {
         return format;
     }
 
-
     private void init() {
         SAXReader reader = new SAXReader();
 
@@ -51,18 +48,9 @@ public class NoteFormat {
         }
 
         indices = new ArrayList<>();
-        footnotes = new ArrayList<>();
 
         Element root = document.getRootElement();
 
-        List<Element> footnotes = root.element("footnotes").elements("footnote");
-        for(Element fn : footnotes){
-            FootNoteFormat f = new FootNoteFormat();
-            f.setId(fn.attributeValue("id"));
-            f.setDoms(getFormatDoms(fn.element("doms")));
-
-            this.footnotes.add(f);
-        }
 
         List<Element> index = root.element("indices").elements("index");
         for(Element idx : index){
@@ -70,13 +58,19 @@ public class NoteFormat {
             fmt.setId(idx.attributeValue("id"));
             fmt.setExample(idx.elementText("example").trim());
             fmt.setExpression(idx.elementText("expression").trim());
-            fmt.setSelector(idx.attributeValue("idx"));
+//            fmt.setSelector(idx.attributeValue("idx"));
             fmt.setDoms(getFormatDoms(idx.element("doms")));
-            fmt.setFootNoteFormat(getFootNoteById(idx.attributeValue("footnote")));
 
+            Element fn = idx.element("footnote");
+            FootNoteFormat f = new FootNoteFormat();
+            f.setId(fn.attributeValue("id"));
+            f.setDoms(getFormatDoms(fn.element("doms")));
+            fmt.setFootNoteFormat(f);
 
             indices.add(fmt);
         }
+
+        System.out.println(this);
     }
 
     private List<FormatDom> getFormatDoms(Element doms){
@@ -97,14 +91,6 @@ public class NoteFormat {
     }
 
 
-    private FootNoteFormat getFootNoteById(String id){
-        for(FootNoteFormat f : footnotes){
-            if(id.equals(f.getId()))
-                return f;
-        }
-        return null;
-    }
-
     public List<IndexFormat> getIndices() {
         return indices;
     }
@@ -113,11 +99,4 @@ public class NoteFormat {
         this.indices = indices;
     }
 
-    public List<FootNoteFormat> getFootnotes() {
-        return footnotes;
-    }
-
-    public void setFootnotes(List<FootNoteFormat> footnotes) {
-        this.footnotes = footnotes;
-    }
 }

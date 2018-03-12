@@ -61,7 +61,7 @@ public class NoteFinder {
 
             Element footElement;
             if (parts[0].trim().length() > 0 && !new File(document.location()).getName().equals(parts[0])) {
-                Document doc = Jsoup.parse(new File(StringUtil.paths(new File(document.location()).getParent(), parts[0])),"utf-8");
+                Document doc = Jsoup.parse(new File(StringUtil.paths(new File(document.location()).getParent(), parts[0])), "utf-8");
                 footElement = doc.selectFirst("#" + parts[1]);
             } else {
                 footElement = document.selectFirst("#" + parts[1]);
@@ -72,20 +72,7 @@ public class NoteFinder {
             String text = null;
             List<FormatDom> doms = index.getFootNoteFormat().getDoms();
             for (FormatDom dom : doms) {
-                Element e;
-                String relation = dom.getRelation();
-                if (!StringUtil.noe(relation)) {
-                    e = footElement;
-                    if(relation.startsWith("$")){
-                        e = e.selectFirst(relation.replaceAll("\\$","")) ;
-                    }else {
-                        for (String rel : relation.split(",")) {
-                            e = getRelationElement(e, rel);
-                        }
-                    }
-                }else{
-                    e = footElement;
-                }
+                Element e = getRelationElement(footElement, dom.getRelation());
 
                 if (!StringUtil.noe(e.attr("id"))) {
                     id = e.attr("id");
@@ -94,7 +81,7 @@ public class NoteFinder {
                     href = e.attr("href");
                 }
 
-                if(dom.isTextual())
+                if (dom.isTextual())
                     text = e.text();
             }
             foot.setId(id);
@@ -110,9 +97,32 @@ public class NoteFinder {
     }
 
     private Element getRelationElement(Element e, String rel) {
+
+        if (StringUtil.noe(rel))
+            return e;
+
+        Element result = e;
+        String split[] = rel.split("\\.");
+        for (String prop : split) {
+            result = doRelationElement(result, prop);
+        }
+
+        if (result == null)
+            System.err.println("节点不存在！");
+        return result;
+
+    }
+
+    private Element doRelationElement(Element e, String prop) {
         try {
-            Method method = Element.class.getMethod(rel);
-            return (Element) method.invoke(e);
+
+            if (prop.startsWith("$")) {
+                return e.selectFirst(prop.replaceAll("\\$", ""));
+            } else {
+                Method method = Element.class.getMethod(prop);
+                return (Element) method.invoke(e);
+            }
+
         } catch (NoSuchMethodException e1) {
             e1.printStackTrace();
             throw new RuntimeException(e1);
@@ -125,23 +135,85 @@ public class NoteFinder {
         }
     }
 
-    private boolean guessDocNoteFormat(Document document) {
+    private boolean guessDocNoteFormat(Document document) throws IOException {
         NoteFormat format = NoteFormat.instance();
         List<IndexFormat> indices = format.getIndices();
 
         for (IndexFormat fmt : indices) {
             Pattern pattern = Pattern.compile(fmt.getExpression());
-
             Matcher matcher = pattern.matcher(document.toString());
             if (matcher.find()) {
+
+
+                String group = matcher.group();
+                Document parse = Jsoup.parse(group);
+
+
+                Elements select = parse.select("[id]");
+                if (select.size() == 0 || select.size() > 1) {
+                    System.err.println("注释内容不包含或包含多个拥有id属性的元素！" + parse.html());
+                    continue;
+                }
+
+                if (!matchDoms(select.get(0), fmt.getDoms()))
+                    continue;
+
+                Elements element = parse.select("[href]");
+                if (element.size() == 0 || element.size() > 1) {
+                    System.err.println("注释不包含或包含多个拥有href属性的元素！" + parse.html());
+                    continue;
+                }
+
+                Document doc = document;
+                String href = element.attr("href");
+                String[] parts = href.split("#");
+                if (!StringUtil.noe(parts[0]) && !parts[0].equals(new File(document.location()).getName())) {
+                    doc = Jsoup.parse(new File(StringUtil.paths(new File(document.location()).getParent(), parts[0])), "utf-8");
+                }
+
+                Element footEle = doc.selectFirst("#" + parts[1]);
+                if (!matchDoms(footEle, fmt.getFootNoteFormat().getDoms()))
+                    continue;
+
                 index = fmt;
                 index.setPattern(pattern);
-
-                System.out.println("发现注释格式#"+fmt.getId()+",样例："+fmt.getExample());
+                System.out.println("发现注释格式#" + fmt.getId() + ",样例：" + fmt.getExample());
                 return true;
             }
         }
 
         return false;
+    }
+
+    private boolean matchDoms(Element element, List<FormatDom> doms) {
+        System.out.println(element);
+
+        for (FormatDom dom : doms) {
+            String relation = dom.getRelation();
+            if (!StringUtil.noe(relation)) {
+
+                Element ele = getRelationElement(element,relation);
+
+
+                boolean b = true;
+                for (String attr : dom.getAttr()) {
+                    b = ele.hasAttr(attr);
+                    if (!b)
+                        break;
+                }
+                b = b && ele.tagName().equalsIgnoreCase(dom.getTagName());
+
+                if (!b) {
+                    return false;
+                }
+            } else {
+                if (!element.tagName().equalsIgnoreCase(dom.getTagName()))
+                    return false;
+            }
+
+        }
+
+
+        return true;
     }
 }

@@ -6,8 +6,6 @@ import java.util.regex.Pattern;
 
 public class FootNoteFormat {
     private String id;
-    private String expression;
-    private Pattern pattern;
     private List<FormatDom> doms;
 
     public String getId() {

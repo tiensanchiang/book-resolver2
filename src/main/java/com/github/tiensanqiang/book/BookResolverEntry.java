@@ -25,7 +25,10 @@ public class BookResolverEntry {
         converter.convert(descriptor);
         DocumentPool instance = DocumentPool.instance();
 
-        System.out.println(instance.get("part0011.html"));
+//        System.out.println(instance.get("part0011.xhtml"));
+       instance.serialize();
+
+       reader.create();
     }
 
 }

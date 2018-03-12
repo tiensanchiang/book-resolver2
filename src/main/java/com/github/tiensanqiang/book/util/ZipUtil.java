@@ -87,7 +87,7 @@ public class ZipUtil{
     }
 
 
-    public static void compress(ZipOutputStream out, BufferedOutputStream bos, File sourceFile, String base) throws Exception {
+    private static void compress(ZipOutputStream out, BufferedOutputStream bos, File sourceFile, String base) throws Exception {
         //如果路径为目录（文件夹）
         if (sourceFile.isDirectory()) {
 
