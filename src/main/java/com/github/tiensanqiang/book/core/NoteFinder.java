@@ -26,6 +26,8 @@ public class NoteFinder {
         if (index == null && !guessDocNoteFormat(document)) {
             return null;
         }
+//        if(!guessDocNoteFormat(document))
+//            return null;
 
         Note note = new Note();
 
@@ -46,8 +48,10 @@ public class NoteFinder {
                 }
             }
 
-            if (StringUtil.noe(id) || StringUtil.noe(href))
-                throw new RuntimeException("标识或链接为空！");
+            if (StringUtil.noe(id) || StringUtil.noe(href)){
+                System.err.println("标识或链接为空！" + group );
+                continue;
+            }
 
             Note.Index item = note.new Index();
             item.setFormat(index);
@@ -144,10 +148,8 @@ public class NoteFinder {
             Matcher matcher = pattern.matcher(document.toString());
             if (matcher.find()) {
 
-
                 String group = matcher.group();
                 Document parse = Jsoup.parse(group);
-
 
                 Elements select = parse.select("[id]");
                 if (select.size() == 0 || select.size() > 1) {
@@ -186,7 +188,7 @@ public class NoteFinder {
     }
 
     private boolean matchDoms(Element element, List<FormatDom> doms) {
-        System.out.println(element);
+//        System.out.println(element);
 
         for (FormatDom dom : doms) {
             String relation = dom.getRelation();

@@ -123,13 +123,23 @@ public class BookConverter {
         Note.Foot foot = index.getFoot();
         String id = foot.getId();
         Element element = refDocument.selectFirst("#" + id);
-        FootNoteFormat format = foot.getFormat();
-        List<FormatDom> removables = format.getRemovableDom();
-        List<Element> collect = removables.stream().map(f -> getRelationElement(element, f.getRelation())).collect(Collectors.toList());
-        collect.forEach(c->c.remove());
 
-        if(index.getId().equals(id)){
-            id = StringUtil.join("_",id);
+        List<Element> images = new ArrayList<>();
+        if(element != null) {
+            FootNoteFormat format = foot.getFormat();
+            List<FormatDom> removables = format.getRemovableDom();
+            List<Element> collect = removables.stream().map(f -> getRelationElement(element, f.getRelation())).collect(Collectors.toList());
+
+            collect.forEach(c -> {
+                Element img = c.selectFirst("img");
+                if(img != null && images.size()==0)
+                    images.add(img.clone());
+                c.remove();
+            });
+
+            if (index.getId().equals(id)) {
+                id = StringUtil.join("_", id);
+            }
         }
 
         Element ol;
@@ -155,6 +165,11 @@ public class BookConverter {
         a.attr("class","duokan-footnote-link");
         a.attr("href",foot.getHref().substring(foot.getHref().indexOf('#')));
         a.text(foot.getText());
+        if(images.size()>0){
+            for (Element image : images) {
+                a.prependChild(image);
+            }
+        }
 
         ol.appendChild(li);
 
