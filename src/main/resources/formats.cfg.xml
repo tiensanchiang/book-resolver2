@@ -117,6 +117,58 @@
                 </example>
             </footnote>
         </index>
+
+        <index id="idx6" >
+            <expression>
+                <![CDATA[
+                    <sup(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</sup\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><a id="note28" href="part0023.xhtml#note28n">[1]</a></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="sup" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx7" >
+            <expression>
+                <![CDATA[
+                     <a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="w46"></a><a href="part0011.xhtml#m46"><sup class="calibre15">[46]</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id"  remove="true"/>
+                <dom tag-name="a" rel="nextElementSibling" remove="true" attr="href" text="true" append="true"/>
+                <dom tag-name="sup"  rel="nextElementSibling.$sup" />
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id"  />
+                    <dom tag-name="a" attr="href" rel="nextElementSibling" />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="note"><a id="m53"></a><a href="part0011.xhtml#w53">[53]</a> 公元前510至前411年。</p>]]>
+                </example>
+            </footnote>
+        </index>
     </indices>
 
 </formats>

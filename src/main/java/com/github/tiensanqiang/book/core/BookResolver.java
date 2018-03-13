@@ -11,6 +11,7 @@ import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class BookResolver{
@@ -154,9 +155,11 @@ public class BookResolver{
     }
 
     private ManifestItem getFirstManifestItem(List<ManifestItem> items,String mediaTypeRegex){
-        for(ManifestItem item : items){
+
+        for(int i= items.size()-1;i>=0;i--){
+            ManifestItem item = items.get(i);
             String mediaType = item.getMediaType();
-            if(!item.getId().contains("cover") && mediaType.matches(mediaTypeRegex))
+            if(!item.getId().contains("cover") &&  mediaType.matches(mediaTypeRegex))
                 return item;
         }
 

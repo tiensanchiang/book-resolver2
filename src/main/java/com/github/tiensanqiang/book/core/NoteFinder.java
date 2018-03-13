@@ -203,7 +203,7 @@ public class NoteFinder {
                     if (!b)
                         break;
                 }
-                b = b && ele.tagName().equalsIgnoreCase(dom.getTagName());
+                b = b && ele !=null && ele.tagName().equalsIgnoreCase(dom.getTagName());
 
                 if (!b) {
                     return false;
