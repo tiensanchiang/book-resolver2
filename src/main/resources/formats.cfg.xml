@@ -193,6 +193,32 @@
                 </example>
             </footnote>
         </index>
+
+        <index id="idx5" >
+            <expression>
+                <![CDATA[
+                    <span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class="math-super"><a id="z4" href="part0009.xhtml#bz4">4</a></span> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="span" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="span" rel="parent"/>
+                    <dom tag-name="p" rel="parent.parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[  <p class="x-c"><span class="no-style-override"><a id="link_99" href="part0029.html#link_98" class="calibre10">[1]</a> 角动量（angular momentum）：。</span></p>]]>
+                </example>
+            </footnote>
+        </index>
     </indices>
 
 </formats>
