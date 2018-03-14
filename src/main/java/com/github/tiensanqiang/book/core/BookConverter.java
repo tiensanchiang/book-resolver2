@@ -47,28 +47,28 @@ public class BookConverter {
                     document = Jsoup.parse(new File(path), "utf-8");
                 Note note = finder.getNote(document);
 
-                if (note != null && note.getIndices().size()>0) {
+                if (note != null && note.getIndices().size() > 0) {
                     List<Note.Index> indices = note.getIndices();
                     System.out.println("文档" + document.location() + "发现" + indices.size() + "个注释。");
 
-                    if(pool.get(name) == null)
-                        pool.add(StringUtil.name(document.location()),document);
+                    if (pool.get(name) == null)
+                        pool.add(StringUtil.name(document.location()), document);
 
-                    addImageAndStyles(descriptor,document);
+                    addImageAndStyles(descriptor, document);
 
-                    for(Note.Index index : indices){
+                    for (Note.Index index : indices) {
                         createImageNote(descriptor, document, index);
-                        createImageFoot(descriptor,document,index);
+                        createImageFoot(descriptor, document, index);
                     }
                 } else {
-                    System.out.println("文档"+document.location()+"不包含注释！");
+                    System.out.println("文档" + document.location() + "不包含注释！");
                 }
 
             }
         }
     }
 
-    public void createImageNote(BookDescriptor descriptor,Document document,Note.Index index){
+    public void createImageNote(BookDescriptor descriptor, Document document, Note.Index index) {
 
         BookContentPaths paths = descriptor.getPaths();
 
@@ -77,11 +77,11 @@ public class BookConverter {
         link.appendChild(img);
 
         String href = index.getHref();
-        String [] parts = href.split("#");
+        String[] parts = href.split("#");
         String rid = parts[1];
-        if(rid.equals(index.getId())){
-            rid = StringUtil.join("_",rid);
-            href = StringUtil.join(parts[0],"#",rid);
+        if (rid.equals(index.getId())) {
+            rid = StringUtil.join("_", rid);
+            href = StringUtil.join(parts[0], "#", rid);
         }
 
 
@@ -91,48 +91,52 @@ public class BookConverter {
 
         img.attr("alt", "注释");
         img.attr("class", "duokan-footnote");
-        img.attr("src",StringUtil.join(paths.getImageHrefPrefix(),"/note.png"));
+        img.attr("src", StringUtil.join(paths.getImageHrefPrefix(), "/note.png"));
 
 
-        Element e = document.selectFirst("#"+index.getId());
+        Element e = document.selectFirst("#" + index.getId());
         FormatDom appendableDom = index.getFormat().getAppendableDom();
-        Element re = getRelationElement(e,appendableDom.getRelation());
+        Element re = getRelationElement(e, appendableDom.getRelation());
+        if (re == null)
+            return;
         re.after(link);
+
 
         List<FormatDom> removables = index.getFormat().getRemovableDom();
         List<Element> collect = removables.stream().map(f -> getRelationElement(e, f.getRelation())).collect(Collectors.toList());
 
-        collect.forEach(c->{if(c!=null)c.remove();});
+        collect.forEach(c -> {
+            if (c != null) c.remove();
+        });
 
     }
 
-    public void createImageFoot(BookDescriptor descriptor,Document document,Note.Index index) throws IOException {
+    public void createImageFoot(BookDescriptor descriptor, Document document, Note.Index index) throws IOException {
         String loc = document.location();
         String name = StringUtil.name(document.location());
-        String[] parts= index.getHref().split("#");
+        String[] parts = index.getHref().split("#");
 
         Document refDocument = document;
-        if(parts[0].trim().length()>0 && !parts[0].equals(name)) {
-            if( ( refDocument = pool.get(parts[0])) == null) {
+        if (parts[0].trim().length() > 0 && !parts[0].equals(name)) {
+            if ((refDocument = pool.get(parts[0])) == null) {
                 refDocument = Jsoup.parse(new File(StringUtil.paths(new File(loc).getParent(), parts[0])), "utf-8");
-                pool.add(parts[0],refDocument);
+                pool.add(parts[0], refDocument);
             }
         }
-
 
         Note.Foot foot = index.getFoot();
         String id = foot.getId();
         Element element = refDocument.selectFirst("#" + id);
 
         List<Element> images = new ArrayList<>();
-        if(element != null) {
+        if (element != null) {
             FootNoteFormat format = foot.getFormat();
             List<FormatDom> removables = format.getRemovableDom();
             List<Element> collect = removables.stream().map(f -> getRelationElement(element, f.getRelation())).collect(Collectors.toList());
 
             collect.forEach(c -> {
                 Element img = c.selectFirst("img");
-                if(img != null && images.size()==0)
+                if (img != null && images.size() == 0)
                     images.add(img.clone());
                 c.remove();
             });
@@ -143,9 +147,9 @@ public class BookConverter {
         }
 
         Element ol;
-        if((ol=document.selectFirst("ol.duokan-footnote-content"))==null){
+        if ((ol = document.selectFirst("ol.duokan-footnote-content")) == null) {
             ol = document.createElement("ol");
-            ol.attr("class","duokan-footnote-content");
+            ol.attr("class", "duokan-footnote-content");
 
             Element body = document.selectFirst("body");
             body.appendChild(ol);
@@ -157,15 +161,15 @@ public class BookConverter {
         p.appendChild(a);
         li.appendChild(p);
 
-        li.attr("class","duokan-footnote-item");
-        li.attr("id",id);
+        li.attr("class", "duokan-footnote-item");
+        li.attr("id", id);
 
-        p.attr("class","footnote-text");
+        p.attr("class", "footnote-text");
 
-        a.attr("class","duokan-footnote-link");
-        a.attr("href",foot.getHref().substring(foot.getHref().indexOf('#')));
+        a.attr("class", "duokan-footnote-link");
+        a.attr("href", foot.getHref().substring(foot.getHref().indexOf('#')));
         a.text(foot.getText());
-        if(images.size()>0){
+        if (images.size() > 0) {
             for (Element image : images) {
                 a.prependChild(image);
             }
@@ -177,16 +181,16 @@ public class BookConverter {
 
     private Element getRelationElement(Element e, String rel) {
         try {
-            if(StringUtil.noe(rel)){
+            if (StringUtil.noe(rel)) {
                 return e;
-            }else if(rel.startsWith("$")){
-                return e.selectFirst(rel.replaceAll("\\$",""));
-            }else {
-                if(e == null)
+            } else if (rel.startsWith("$")) {
+                return e.selectFirst(rel.replaceAll("\\$", ""));
+            } else {
+                if (e == null)
                     return null;
                 Element res = e;
                 String parts[] = rel.split("\\.");
-                for(String p : parts) {
+                for (String p : parts) {
                     Method method = Element.class.getMethod(p);
                     res = (Element) method.invoke(e);
                 }
@@ -204,36 +208,36 @@ public class BookConverter {
         }
     }
 
-    public void addImageAndStyles(BookDescriptor descriptor,Document document) {
+    public void addImageAndStyles(BookDescriptor descriptor, Document document) {
         BookContentPaths paths = descriptor.getPaths();
         File imagesPath = new File(paths.getImagePath());
-        if(!imagesPath.exists()){
+        if (!imagesPath.exists()) {
             imagesPath.mkdirs();
         }
 
-        try(InputStream is = this.getClass().getClassLoader().getResourceAsStream("note.png");
-            OutputStream os = new FileOutputStream(new File(imagesPath.getPath()+File.separator+"note.png"))){
-            IOUtils.copy(is,os);
-        }catch (IOException e){
+        try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("note.png");
+             OutputStream os = new FileOutputStream(new File(imagesPath.getPath() + File.separator + "note.png"))) {
+            IOUtils.copy(is, os);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         File stylesPath = new File(paths.getStylePath());
-        if(!stylesPath.exists()){
+        if (!stylesPath.exists()) {
             stylesPath.mkdirs();
         }
 
-        try(InputStream is = this.getClass().getClassLoader().getResourceAsStream("note.css");
-            OutputStream os = new FileOutputStream(new File(stylesPath.getPath()+File.separator+"note.css"))){
-            IOUtils.copy(is,os);
-        }catch (IOException e){
+        try (InputStream is = this.getClass().getClassLoader().getResourceAsStream("note.css");
+             OutputStream os = new FileOutputStream(new File(stylesPath.getPath() + File.separator + "note.css"))) {
+            IOUtils.copy(is, os);
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
         Element head = document.selectFirst("head");
         Element link = document.createElement("link");
 
-        link.attr("href",StringUtil.join(paths.getStyleHrefPrefix(),"/note.css"));
+        link.attr("href", StringUtil.join(paths.getStyleHrefPrefix(), "/note.css"));
         link.attr("rel", "stylesheet");
         link.attr("type", "text/css");
         head.appendChild(link);

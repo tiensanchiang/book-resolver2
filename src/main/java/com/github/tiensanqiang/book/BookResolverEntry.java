@@ -7,8 +7,8 @@ public class BookResolverEntry {
 
     public static void main(String[] args) throws Exception {
 
-//        String s = "<a id=\"j2\" href=\"part0054.html#j2\"><sup class=\"calibre16\">【2】</sup></a>";
-//        System.out.println(s.matches("<a\\s+(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<sup\\s*>\\s*[\\[【［（(]?\\s*\\d+\\s*[）)\\]］】]?\\s*</sup\\s*>\\s*</a\\s*>"));
+        String s = "<sup class=\"suptext\"><a id=\"fhzs3\" href=\"part0250.xhtml#zhushi3\">〔3〕</a></sup>";
+        System.out.println(s.matches("<sup\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<a\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*[\\[【［（〔(]?\\s*\\d+\\s*[）)\\]］】]?\\s*</a\\s*>\\s*</sup\\s*>"));
 
         if (args == null || args.length < 1) {
             System.err.println("Usage: br  %Epub file name%");

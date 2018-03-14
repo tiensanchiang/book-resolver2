@@ -23,11 +23,11 @@ public class NoteFinder {
 
     public Note getNote(Document document) throws IOException {
 
-        if (index == null && !guessDocNoteFormat(document)) {
-            return null;
-        }
-//        if(!guessDocNoteFormat(document))
+//        if (index == null && !guessDocNoteFormat(document)) {
 //            return null;
+//        }
+        if(!guessDocNoteFormat(document))
+            return null;
 
         Note note = new Note();
 
