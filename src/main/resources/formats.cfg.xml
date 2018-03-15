@@ -268,6 +268,30 @@
                 </example>
             </footnote>
         </index>
+
+        <index id="idx10" >
+            <expression>
+                <![CDATA[
+                    <a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><a id="note28" href="part0023.xhtml#note28n">[1]</a></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  text="true"  append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
     </indices>
 
 </formats>

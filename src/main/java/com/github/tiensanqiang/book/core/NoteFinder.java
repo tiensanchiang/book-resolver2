@@ -59,6 +59,8 @@ public class NoteFinder {
             item.setHref(href);
 
             String[] parts = href.split("#");
+            if(parts.length<2)
+                continue;
 
             Note.Foot foot = note.new Foot();
             foot.setId(parts[1]);
@@ -169,6 +171,8 @@ public class NoteFinder {
                 Document doc = document;
                 String href = element.attr("href");
                 String[] parts = href.split("#");
+                if(parts.length<2)
+                    continue;
                 if (!StringUtil.noe(parts[0]) && !parts[0].equals(new File(document.location()).getName())) {
                     doc = Jsoup.parse(new File(StringUtil.paths(new File(document.location()).getParent(), parts[0])), "utf-8");
                 }
