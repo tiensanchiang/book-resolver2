@@ -7,8 +7,8 @@ public class BookResolverEntry {
 
     public static void main(String[] args) throws Exception {
 
-        String s = "<sup class=\"suptext\"><a id=\"fhzs3\" href=\"part0250.xhtml#zhushi3\">〔3〕</a></sup>";
-        System.out.println(s.matches("<sup\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<a\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*[\\[【［（〔(]?\\s*\\d+\\s*[）)\\]］】]?\\s*</a\\s*>\\s*</sup\\s*>"));
+        String s = "<span class=\"no-style-override7\"><a id=\"link_35\" href=\"part0013.html#link_34\" class=\"calibre6\"><sup class=\"calibre5\">[3]</sup></a><br class=\"calibre3\"/></span>";
+        System.out.println(s.matches("<span\\s+(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<a\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<sup\\s+(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*[\\[【［（(]?\\s*\\d+\\s*[）)\\]］】]?\\s*</sup></a\\s*>\\s*(<br class=\"\\w+\"/>)?</span\\s*>"));
 
         if (args == null || args.length < 1) {
             System.err.println("Usage: br  %Epub file name%");
