@@ -159,7 +159,7 @@ public class BookResolver{
         for(int i= items.size()-1;i>=0;i--){
             ManifestItem item = items.get(i);
             String mediaType = item.getMediaType();
-            if(!item.getId().contains("cover") &&  mediaType.matches(mediaTypeRegex))
+            if(!item.getId().contains("cover")&&!item.getId().contains("title") &&  mediaType.matches(mediaTypeRegex))
                 return item;
         }
 

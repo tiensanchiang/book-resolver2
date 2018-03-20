@@ -50,7 +50,9 @@ public class DocumentPool implements Serializable{
         for(String key : keys){
             Document document = map.get(key);
             try(OutputStream os = new FileOutputStream(new File(document.location()))){
-                IOUtils.write(document.toString(),os,"UTF-8");
+                String result = document.toString();
+                result = result.replaceAll("・", "·");
+                IOUtils.write(result,os,"UTF-8");
             }catch (IOException e){
                 e.printStackTrace();
             }

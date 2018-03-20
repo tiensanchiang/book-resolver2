@@ -48,15 +48,20 @@ public class NoteFinder {
                 }
             }
 
-            if (StringUtil.noe(id) || StringUtil.noe(href)){
-                System.err.println("标识或链接为空！" + group );
-                continue;
-            }
+//            if (StringUtil.noe(id) || StringUtil.noe(href)){
+//                System.err.println("标识或链接为空！" + group );
+//                continue;
+//            }
 
             Note.Index item = note.new Index();
             item.setFormat(index);
             item.setId(id);
             item.setHref(href);
+
+            if(StringUtil.noe(id))
+                item.setId(StringUtil.uuid());
+            if(StringUtil.noe(href))
+                item.setHref("#");
 
             String[] parts = href.split("#");
             if(parts.length<2)
@@ -94,6 +99,9 @@ public class NoteFinder {
             foot.setHref(href);
             foot.setFormat(index.getFootNoteFormat());
             foot.setText(text);
+
+            if(StringUtil.noe(foot.getId()))
+                foot.setId(StringUtil.uuid());
 
             item.setFoot(foot);
             note.addIndex(item);
@@ -155,8 +163,13 @@ public class NoteFinder {
 
                 Elements select = parse.select("[id]");
                 if (select.size() == 0 || select.size() > 1) {
-                    System.err.println("注释内容不包含或包含多个拥有id属性的元素！" + parse.html());
-                    continue;
+//                    System.err.println("注释内容不包含或包含多个拥有id属性的元素！" + parse.html());
+//                    continue;
+                    select = parse.select("[href]");
+                    if (select.size() == 0 || select.size() > 1) {
+                        System.err.println("注释内容不包含或包含多个拥有id属性的元素！" + parse.html());
+                        continue;
+                    }
                 }
 
                 if (!matchDoms(select.get(0), fmt.getDoms()))

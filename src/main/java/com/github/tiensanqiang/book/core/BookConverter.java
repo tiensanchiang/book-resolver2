@@ -125,6 +125,8 @@ public class BookConverter {
         }
 
         Note.Foot foot = index.getFoot();
+        if(foot.getHref() == null)
+            return;
         String id = foot.getId();
         Element element = refDocument.selectFirst("#" + id);
 
@@ -167,7 +169,7 @@ public class BookConverter {
         p.attr("class", "footnote-text");
 
         a.attr("class", "duokan-footnote-link");
-        a.attr("href", foot.getHref().substring(foot.getHref().indexOf('#')));
+        a.attr("href", foot.getHref().indexOf('#')>=0?foot.getHref().substring(foot.getHref().indexOf('#')):foot.getHref());
         a.text(foot.getText());
         if (images.size() > 0) {
             for (Element image : images) {
@@ -237,7 +239,11 @@ public class BookConverter {
         Element head = document.selectFirst("head");
         Element link = document.createElement("link");
 
-        link.attr("href", StringUtil.join(paths.getStyleHrefPrefix(), "/note.css"));
+        if(StringUtil.noe(paths.getStyleHrefPrefix())){
+            link.attr("href", StringUtil.join("note.css"));
+        }else{
+            link.attr("href", StringUtil.join(paths.getStyleHrefPrefix(), "/note.css"));
+        }
         link.attr("rel", "stylesheet");
         link.attr("type", "text/css");
         head.appendChild(link);

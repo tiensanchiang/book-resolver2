@@ -68,6 +68,32 @@
             </footnote>
         </index>
 
+        <index id="idx22" >
+            <expression>
+                <![CDATA[
+                   <a\s+(\w+\s*=\s*\"(.*?)\")*\s*></a><a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="a" attr="href" rel="nextElementSibling" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="nextElementSibling.$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="id"/>
+                    <dom tag-name="a" attr="href" rel="nextElementSibling"></dom>
+                    <dom tag-name="p" rel="parent.parent" remove="true" text="true" append="true"/>
+                </doms>
+            </footnote>
+
+            <p class="calibre_7"><span class="calibre14"><a id="filepos40601"></a><a href="#filepos15764">[1]</a> 西南部（South Country）：特指英伦本岛的西南部区域。——译者</span></p>
+        </index>
+
         <index id="idx3" >
             <expression>
                 <![CDATA[
@@ -272,20 +298,50 @@
         <index id="idx10" >
             <expression>
                 <![CDATA[
-                    <a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</small>\s*</sup>
                 ]]>
             </expression>
             <example>
-                <![CDATA[ <sup><a id="note28" href="part0023.xhtml#note28n">[1]</a></sup> ]]>
+                <![CDATA[ <sup><small><a></a><a></a></small></sup>]]>
             </example>
             <doms>
-                <dom tag-name="a" attr="id,href"  text="true"  append="true" remove="true"/>
+                <dom tag-name="a" attr="id"/>
+                <dom tag-name="a" rel="nextElementSibling" attr="href" />
+                <dom tag-name="small" rel="parent"/>
+                <dom tag-name="sup" rel="parent.parent" append="true" remove="true" text="true"/>
             </doms>
 
             <footnote >
                 <doms>
-                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="a" attr="id"  />
+                    <dom tag-name="a" rel="nextElementSibling" attr="href"/>
                     <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx11" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="small" attr="id"/>
+                <dom tag-name="a" rel="$a" attr="href"/>
+                <dom tag-name="sup" rel="parent" append="true" remove="true" text="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
                 </doms>
                 <example>
                     <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
