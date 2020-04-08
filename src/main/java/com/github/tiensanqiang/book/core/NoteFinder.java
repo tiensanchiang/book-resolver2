@@ -64,7 +64,7 @@ public class NoteFinder {
                 item.setHref("#");
 
             if(href == null){
-                System.out.println("==============>>>href is null");
+                System.err.println("==============>>>href is null");
                 continue;
             }
 
@@ -201,7 +201,7 @@ public class NoteFinder {
 
                 index = fmt;
                 index.setPattern(pattern);
-                System.out.println("发现注释格式#" + fmt.getId() + ",样例：" + fmt.getExample());
+                //System.out.println("发现注释格式#" + fmt.getId() + ",样例：" + fmt.getExample());
                 return true;
             }
         }

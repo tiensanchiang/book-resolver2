@@ -10,6 +10,9 @@ public class BookContentPaths {
     private String imageHrefPrefix;
     private String styleHrefPrefix;
 
+    private String imageOpfHrefPrefix;
+    private String styleOpfHrefPrefix;
+
     public String getRootPath() {
         return rootPath;
     }
@@ -56,5 +59,21 @@ public class BookContentPaths {
 
     public void setStyleHrefPrefix(String styleHrefPrefix) {
         this.styleHrefPrefix = styleHrefPrefix;
+    }
+
+    public String getImageOpfHrefPrefix() {
+        return imageOpfHrefPrefix;
+    }
+
+    public void setImageOpfHrefPrefix(String imageOpfHrefPrefix) {
+        this.imageOpfHrefPrefix = imageOpfHrefPrefix;
+    }
+
+    public String getStyleOpfHrefPrefix() {
+        return styleOpfHrefPrefix;
+    }
+
+    public void setStyleOpfHrefPrefix(String styleOpfHrefPrefix) {
+        this.styleOpfHrefPrefix = styleOpfHrefPrefix;
     }
 }

@@ -70,7 +70,7 @@ public class NoteFormat {
             indices.add(fmt);
         }
 
-        System.out.println(this);
+        //System.out.println(this);
     }
 
     private List<FormatDom> getFormatDoms(Element doms){

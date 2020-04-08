@@ -2,6 +2,7 @@ package com.github.tiensanqiang.book.core;
 
 import com.github.tiensanqiang.book.config.FootNoteFormat;
 import com.github.tiensanqiang.book.config.FormatDom;
+import com.github.tiensanqiang.book.config.IndexFormat;
 import com.github.tiensanqiang.book.util.StringUtil;
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
@@ -49,7 +50,9 @@ public class BookConverter {
 
                 if (note != null && note.getIndices().size() > 0) {
                     List<Note.Index> indices = note.getIndices();
-                    System.out.println("文档" + document.location() + "发现" + indices.size() + "个注释。");
+                    System.out.print("文档 【" + new File(document.location()).getName() + "】 发现" + indices.size() + "个注释, ");
+                    IndexFormat fmt = indices.get(0).getFormat();
+                    System.out.println("格式：" + fmt.getId());
 
                     if (pool.get(name) == null)
                         pool.add(StringUtil.name(document.location()), document);
@@ -61,7 +64,7 @@ public class BookConverter {
                         createImageFoot(descriptor, document, index);
                     }
                 } else {
-                    System.out.println("文档" + document.location() + "不包含注释！");
+                    System.out.println("文档 【" + new File(document.location()).getName() + "】 不包含注释！");
                 }
 
             }

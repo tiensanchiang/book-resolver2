@@ -130,8 +130,8 @@ public class BookResolver{
         }
 
         Path base = Paths.get(paths.getTextPath());
-        Path text = Paths.get(paths.getImagePath());
-        Path relative = base.relativize(text);
+        Path image = Paths.get(paths.getImagePath());
+        Path relative = base.relativize(image);
         paths.setImageHrefPrefix(relative.toString().replaceAll("[\\\\]","/"));
 
         Path style = Paths.get(paths.getStylePath());
@@ -139,6 +139,13 @@ public class BookResolver{
         paths.setStyleHrefPrefix(relative.toString().replaceAll("[\\\\]","/"));
 
         paths.setRootPath(rootPath);
+
+        String opfPath = StringUtil.join(File.separatorChar, rootPath,prefix);
+        relative = Paths.get(opfPath).relativize(image);
+        paths.setImageOpfHrefPrefix(relative.toString().replaceAll("[\\\\]","/"));
+        relative = Paths.get(opfPath).relativize(style);
+        paths.setStyleOpfHrefPrefix(relative.toString().replaceAll("[\\\\]","/"));
+
         return paths;
     }
 

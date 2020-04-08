@@ -59,5 +59,9 @@ public class DocumentPool implements Serializable{
         }
     }
 
+    public void clear(){
+        map.clear();
+    }
+
 
 }

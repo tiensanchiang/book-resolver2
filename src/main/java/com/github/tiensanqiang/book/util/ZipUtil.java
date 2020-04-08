@@ -11,7 +11,7 @@ public class ZipUtil{
 
     public static void zip(String zipFileName, String sourceFileName) throws Exception {
         //File zipFile = new File(zipFileName);
-        System.out.println("压缩中...");
+        System.out.print("压缩中......");
 
         //创建zip输出流
         ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
@@ -96,7 +96,7 @@ public class ZipUtil{
 
             if (fileList.length == 0)//如果文件夹为空，则只需在目的地zip文件中写入一个目录进入点
             {
-                System.out.println(base + "/");
+                //System.out.println(base + "/");
                 out.putNextEntry(new ZipEntry(base + "/"));
             } else//如果文件夹不为空，则递归调用compress，文件夹中的每一个文件（或文件夹）进行压缩
             {
@@ -111,7 +111,7 @@ public class ZipUtil{
             BufferedInputStream bis = new BufferedInputStream(fos);
 
 //            int tag;
-            System.out.println(base);
+            //System.out.println(base);
             //将源文件写入到zip文件中
 //            while ((tag = bis.read()) != -1) {
 //                bos.write(tag);
