@@ -134,7 +134,15 @@ public class BookConverter {
         if (element != null) {
             FootNoteFormat format = foot.getFormat();
             List<FormatDom> removables = format.getRemovableDom();
-            List<Element> collect = removables.stream().map(f -> getRelationElement(element, f.getRelation())).collect(Collectors.toList());
+            List<Element> collect = removables.stream().map(f ->
+                    {
+                        Element re = getRelationElement(element, f.getRelation());
+                        if(re.tagName().equals("body")){
+                            return element;
+                        }else{
+                            return re;
+                        }
+                    }).collect(Collectors.toList());
 
             collect.forEach(c -> {
                 Element img = c.selectFirst("img");

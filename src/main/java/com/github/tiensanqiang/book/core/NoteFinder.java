@@ -63,6 +63,11 @@ public class NoteFinder {
             if(StringUtil.noe(href))
                 item.setHref("#");
 
+            if(href == null){
+                System.out.println("==============>>>href is null");
+                continue;
+            }
+
             String[] parts = href.split("#");
             if(parts.length<2)
                 continue;
