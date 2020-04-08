@@ -4,12 +4,21 @@ img.duokan-footnote {
 }
 
 /* 注释条目*/
+/*li.duokan-footnote-item {*/
+/*    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";*/
+/*    text-align: left;*/
+/*    font-size: 0.85em;*/
+/*    line-height: 1.2;*/
+/*    padding: 0px;*/
+/*}*/
+
 li.duokan-footnote-item {
-    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";
+    font-family: kaiti;
     text-align: left;
-    font-size: 0.85em;
+    color: #000;
+    font-size: 0.9em;
     line-height: 1.2;
-    padding: 0px;
+    padding: 0;
 }
 
 a.duokan-footnote-link {
@@ -17,12 +26,20 @@ a.duokan-footnote-link {
     text-decoration: none;
 }
 
-p.footnote-text {
-    font-size: 0.85em;
-    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";
+/*p.footnote-text {*/
+/*    font-size: 0.85em;*/
+/*    font-family: "DK-HEITI","微软雅黑","黑体","DK-SONGTI";*/
+/*    text-align: left;*/
+/*    margin: 0;*/
+/*    line-height: 1.2;*/
+/*}*/
+li.footnote-text {
+    font-family: kaiti;
     text-align: left;
-    margin: 0;
+    color: #000;
+    font-size: 0.9em;
     line-height: 1.2;
+    padding: 0;
 }
 
 ol.duokan-footnote-content {
