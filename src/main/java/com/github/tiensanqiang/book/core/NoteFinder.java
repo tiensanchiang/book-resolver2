@@ -72,6 +72,10 @@ public class NoteFinder {
             if(parts.length<2)
                 continue;
 
+            if(!StringUtil.noe(index.getHrefExpression())
+                    && !href.matches(index.getHrefExpression()))
+                continue;
+
             Note.Foot foot = note.new Foot();
             foot.setId(parts[1]);
 

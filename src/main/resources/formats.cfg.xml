@@ -407,11 +407,14 @@
         <index id="idx14" >
             <expression>
                 <![CDATA[
-                    <a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a>
+                    <a\s+((id|href)\s*=\s*\"(.*?)\")+\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a>
                 ]]>
             </expression>
+            <href-expression>
+                <![CDATA[ .+#b-\d+ ]]>
+            </href-expression>
             <example>
-                <![CDATA[ <a></a>]]>
+                <![CDATA[ <a id="" href=""></a>]]>
             </example>
             <doms>
                 <dom tag-name="a" attr="id,href" append="true" remove="true" text="true"/>

@@ -58,6 +58,7 @@ public class NoteFormat {
             fmt.setId(idx.attributeValue("id"));
             fmt.setExample(idx.elementText("example").trim());
             fmt.setExpression(idx.elementText("expression").trim());
+            fmt.setHrefExpression(idx.elementText("href-expression")==null?null:idx.elementText("href-expression").trim());
 //            fmt.setSelector(idx.attributeValue("idx"));
             fmt.setDoms(getFormatDoms(idx.element("doms")));
 

@@ -7,6 +7,7 @@ import java.util.regex.Pattern;
 public class IndexFormat {
     private String id;
     private String expression;
+    private String hrefExpression;
     private Pattern pattern;
     private String example;
     private FootNoteFormat footNoteFormat;
@@ -60,6 +61,14 @@ public class IndexFormat {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getHrefExpression() {
+        return hrefExpression;
+    }
+
+    public void setHrefExpression(String hrefExpression) {
+        this.hrefExpression = hrefExpression;
     }
 
     public FormatDom getAppendableDom(){
