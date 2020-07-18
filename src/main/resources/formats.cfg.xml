@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <formats>
     <indices>
+
+        <index id="idx0" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<sup\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</span\s*></a\s*></small\s*></sup\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="filepos32754"></a><sup class="calibre5"><small class="calibre6"><a href="#filepos37154"><span class="calibre6">[3]</span></a></small></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="sup" rel="nextElementSibling"  remove="true" append="true"/>
+                <dom tag-name="small" rel="nextElementSibling.$small"/>
+                <dom tag-name="a" rel="nextElementSibling.$a" attr="href"/>
+            </doms>
+            <footnote id="ft1">
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true" />
+                    <dom tag-name="a" rel="$a" attr="href"/>
+                </doms>
+            </footnote>
+        </index>
+
         <index id="idx1" >
             <expression>
                 <![CDATA[
