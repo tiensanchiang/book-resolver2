@@ -185,7 +185,7 @@ public class BookConverter {
 
         a.attr("class", "duokan-footnote-link");
         a.attr("href", foot.getHref().indexOf('#')>=0?foot.getHref().substring(foot.getHref().indexOf('#')):foot.getHref());
-        a.text(foot.getText());
+        a.text(foot.getText().replaceAll("^\\[\\d+\\]",""));
         if (images.size() > 0) {
             for (Element image : images) {
                 a.prependChild(image);

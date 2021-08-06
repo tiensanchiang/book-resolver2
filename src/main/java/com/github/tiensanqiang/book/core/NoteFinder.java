@@ -93,17 +93,22 @@ public class NoteFinder {
             List<FormatDom> doms = index.getFootNoteFormat().getDoms();
             for (FormatDom dom : doms) {
                 Element e = getRelationElement(footElement, dom.getRelation());
-
-                if (!StringUtil.noe(e.attr("id"))) {
+                if(e == null) {
+                    id = null;
+                    break;
+                }
+                if (e!=null && !StringUtil.noe(e.attr("id"))) {
                     id = e.attr("id");
                 }
-                if (!StringUtil.noe(e.attr("href"))) {
+                if (e!=null && !StringUtil.noe(e.attr("href"))) {
                     href = e.attr("href");
                 }
 
                 if (dom.isTextual())
                     text = e.text();
             }
+            if(id == null)
+                continue;
             foot.setId(id);
             foot.setHref(href);
             foot.setFormat(index.getFootNoteFormat());
@@ -200,7 +205,7 @@ public class NoteFinder {
                 }
 
                 Element footEle = doc.selectFirst("#" + parts[1]);
-                if (!matchDoms(footEle, fmt.getFootNoteFormat().getDoms()))
+                if (footEle==null || !matchDoms(footEle, fmt.getFootNoteFormat().getDoms()))
                     continue;
 
                 index = fmt;
@@ -222,6 +227,8 @@ public class NoteFinder {
 
                 Element ele = getRelationElement(element,relation);
 
+                if(ele==null)
+                    continue;
 
                 boolean b = true;
                 for (String attr : dom.getAttr()) {

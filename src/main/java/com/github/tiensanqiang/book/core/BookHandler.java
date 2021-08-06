@@ -10,6 +10,7 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 import java.io.*;
+import java.nio.file.Files;
 
 public class BookHandler {
 
@@ -96,13 +97,13 @@ public class BookHandler {
         css.addAttribute("media-type","text/css");
         manifest.add(css);
 
-        Element spine = root.element("spine");
-        Element itemref = DocumentHelper.createElement(QName.get("itemref", spine.getNamespace()));
-        itemref.addAttribute("idref", imgId);
-        spine.add(itemref);
-        itemref =  DocumentHelper.createElement(QName.get("itemref", spine.getNamespace()));
-        itemref.addAttribute("idref", cssId);
-        spine.add(itemref);
+//        Element spine = root.element("spine");
+//        Element itemref = DocumentHelper.createElement(QName.get("itemref", spine.getNamespace()));
+//        itemref.addAttribute("idref", imgId);
+//        spine.add(itemref);
+//        itemref =  DocumentHelper.createElement(QName.get("itemref", spine.getNamespace()));
+//        itemref.addAttribute("idref", cssId);
+//        spine.add(itemref);
 
         OutputFormat format = OutputFormat.createPrettyPrint();
         XMLWriter xmlWriter = new XMLWriter(new FileOutputStream(opf), format);
@@ -113,6 +114,14 @@ public class BookHandler {
     private String getPath(String middle){
         String userDir = System.getProperty("user.dir");
         return StringUtil.paths(userDir, middle, fileName,"");
+    }
+
+    public void clear(){
+        try {
+            FileUtils.deleteDirectory(new File(dataPath));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

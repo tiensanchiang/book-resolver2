@@ -8,7 +8,9 @@ import org.dom4j.io.SAXReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class NoteFormat {
 
@@ -51,6 +53,7 @@ public class NoteFormat {
 
         Element root = document.getRootElement();
 
+        Map<String, FootNoteFormat> footnoteMap = getFootnoteMap(root);
 
         List<Element> index = root.element("indices").elements("index");
         for(Element idx : index){
@@ -63,15 +66,40 @@ public class NoteFormat {
             fmt.setDoms(getFormatDoms(idx.element("doms")));
 
             Element fn = idx.element("footnote");
-            FootNoteFormat f = new FootNoteFormat();
-            f.setId(fn.attributeValue("id"));
-            f.setDoms(getFormatDoms(fn.element("doms")));
-            fmt.setFootNoteFormat(f);
+            if(fn != null) {
+                FootNoteFormat f = new FootNoteFormat();
+                f.setId(fn.attributeValue("id"));
+                f.setDoms(getFormatDoms(fn.element("doms")));
+                fmt.setFootNoteFormat(f);
+            }else{
+                String footnote = idx.attributeValue("footnote");
+                FootNoteFormat f = footnoteMap.get(footnote);
+                if(f == null)
+                    throw new IllegalStateException("脚注格式为空！");
+                fmt.setFootNoteFormat(f);
+            }
 
             indices.add(fmt);
         }
 
-        //System.out.println(this);
+    }
+
+    private Map<String, FootNoteFormat> getFootnoteMap(Element root){
+        Map<String, FootNoteFormat> result = new HashMap<>();
+        List<Element> footnotes = root.element("footnotes").elements("footnote");
+        if(footnotes == null || footnotes.size() == 0)
+            return result;
+        for(Element footnote : footnotes){
+            String id = footnote.attributeValue("id");
+            if(id == null)
+                continue;
+            FootNoteFormat fnf  = new FootNoteFormat();
+            fnf.setId(id);
+            fnf.setDoms(getFormatDoms(footnote.element("doms")));
+
+            result.put(id, fnf);
+        }
+        return result;
     }
 
     private List<FormatDom> getFormatDoms(Element doms){

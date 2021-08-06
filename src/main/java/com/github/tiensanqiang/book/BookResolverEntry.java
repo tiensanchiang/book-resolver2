@@ -1,5 +1,8 @@
 package com.github.tiensanqiang.book;
 
+import cn.hutool.core.lang.ObjectId;
+import cn.hutool.core.lang.Snowflake;
+import cn.hutool.core.util.IdUtil;
 import com.github.tiensanqiang.book.core.*;
 import com.github.tiensanqiang.book.util.StringUtil;
 
@@ -9,6 +12,20 @@ public class BookResolverEntry {
 
 
     public static void main(String[] args) throws Exception {
+
+        String id = ObjectId.next();
+        System.out.println(id);
+
+        Snowflake snowflake = IdUtil.getSnowflake(1, 1);
+
+
+//        for(int i=0;i<1000000;i++) {
+//            long sid = snowflake.nextId();
+//            System.out.println(sid);
+//        }
+//
+//        if(true)
+//            return;
 
 //        String s = "<span class=\"math-super\"><a id=\"noteBack_1\" href=\"part0004_split_002.html#note_1\">[1]</a></span>";
 //        System.out.println(s.matches("<span\\s+(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*<a\\s*(\\w+\\s*=\\s*\\\"(.*?)\\\")*\\s*>\\s*[\\[【［（(]?\\s*\\d+\\s*[）)\\]］】]?\\s*</a\\s*>\\s*</span\\s*>"));
@@ -51,6 +68,7 @@ public class BookResolverEntry {
 
         reader.create(descriptor);
         instance.clear();
+        reader.clear();
         System.out.println("=================================结束处理文件=================================\n");
     }
 

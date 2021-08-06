@@ -1,0 +1,636 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<formats>
+    <indices>
+
+        <index id="idx0" >
+            <expression>
+                <![CDATA[
+                    <a[^<>]*?>\s*</a>\s*<sup[^<>]*?>\s*<small[^<>]*?>\s*<a[^<>]*?>\s*<span[^<>]*?>(<span[^<>]*?>)?\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*(</span>)?</span\s*></a\s*></small\s*></sup\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="filepos32754"></a><sup class="calibre5"><small class="calibre6"><a href="#filepos37154"><span class="calibre6">[3]</span></a></small></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="sup" rel="nextElementSibling"  remove="true" append="true"/>
+                <dom tag-name="small" rel="nextElementSibling.$small"/>
+                <dom tag-name="a" rel="nextElementSibling.$a" attr="href"/>
+            </doms>
+            <footnote id="ft1">
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true" />
+                    <dom tag-name="a" rel="$a" attr="href"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx0-1" >
+            <expression>
+                <![CDATA[
+                <a[^<>].*?></a><sup[^<>].*?><small[^<>].*?><a[^<>].*?><span[^<>].*?><span[^<>].*?>[^<>]*?</span></span></a></small></sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="filepos32754"></a><sup class="calibre5"><small class="calibre6"><a href="#filepos37154"><span class="calibre6">[3]</span></a></small></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="sup" rel="nextElementSibling"  remove="true" append="true"/>
+                <dom tag-name="small" rel="nextElementSibling.$small"/>
+                <dom tag-name="a" rel="nextElementSibling.$a" attr="href"/>
+            </doms>
+            <footnote id="ft1">
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true" />
+                    <dom tag-name="a" rel="$a" attr="href"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx1" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="w2"></a> <a href="text00006.html#m2"> <sup>[2]</sup> </a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="a" rel="nextElementSibling" attr="href" remove="true" append="true"/>
+                <dom tag-name="sup" rel="nextElementSibling.$sup"/>
+            </doms>
+            <footnote id="ft1">
+                <doms>
+                    <dom tag-name="a" attr="id"/>
+                    <dom tag-name="p" rel="parent" remove="true" text="true"/>
+                    <dom tag-name="a" rel="nextElementSibling" attr="href"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx2" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="id,href"/>
+                    <dom tag-name="p" rel="parent" remove="true" text="true"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx21" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="id,href"/>
+                    <dom tag-name="div" rel="parent" remove="true" text="true"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx22" >
+            <expression>
+                <![CDATA[
+                   <a\s+(\w+\s*=\s*\"(.*?)\")*\s*></a><a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id" remove="true"/>
+                <dom tag-name="a" attr="href" rel="nextElementSibling" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="nextElementSibling.$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="id"/>
+                    <dom tag-name="a" attr="href" rel="nextElementSibling"></dom>
+                    <dom tag-name="p" rel="parent.parent" remove="true" text="true" append="true"/>
+                </doms>
+            </footnote>
+
+            <p class="calibre_7"><span class="calibre14"><a id="filepos40601"></a><a href="#filepos15764">[1]</a> 西南部（South Country）：特指英伦本岛的西南部区域。——译者</span></p>
+        </index>
+
+        <index id="idx3" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="fn20" href="part0005.xhtml#ft20"><sup>[20]</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="sup" text="true"/>
+                <dom tag-name="a" rel="parent" attr="href" remove="true" append="true"/>
+            </doms>
+
+            <footnote id="ft3">
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true"/>
+                    <dom tag-name="a" rel="$a" remove="true" text="true"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx4" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="kindle-cn-footnote" id="ft28"><a href="part0012.xhtml#fn28">[28]</a>蹊跷（qī qiāo)：也作“跷蹊”。希奇古怪。</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx5" >
+            <expression>
+                <![CDATA[
+                    <span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class="math-super"><a id="z4" href="part0009.xhtml#bz4">4</a></span> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="span" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="zhusi"><a id="bz6" href="part0007.xhtml#z6">[6]</a>L.Alfenus Varus，继波利欧任阿尔卑斯山南高卢总督，总司该区没收土地的工作。</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx6" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[〔【［（(]?\s*[\d注\u2460-\u24FF\u3251-\u325F]+\s*[）)〕\]］】]?\s*</a\s*>\s*</sup\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><a id="note28" href="part0023.xhtml#note28n">[1]</a></sup> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="sup" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx7" >
+            <expression>
+                <![CDATA[
+                     <a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="w46"></a><a href="part0011.xhtml#m46"><sup class="calibre15">[46]</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id"  remove="true"/>
+                <dom tag-name="a" rel="nextElementSibling" remove="true" attr="href" text="true" append="true"/>
+                <dom tag-name="sup"  rel="nextElementSibling.$sup" />
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id"  />
+                    <dom tag-name="a" attr="href" rel="nextElementSibling" />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="note"><a id="m53"></a><a href="part0011.xhtml#w53">[53]</a> 公元前510至前411年。</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx7">
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</span\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="note18" href="part0239.xhtml#notef18"><span class="noteSuper">[18]</span></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" text="true" append="true" />
+                <dom tag-name="span" rel="$span" />
+            </doms>
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p class="zhusi"><a id="bz6" href="part0007.xhtml#z6">[6]</a>L.Alfenus Varus，继波利欧任阿尔卑斯山南高卢总督，总司该区没收土地的工作。</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx8" >
+            <expression>
+                <![CDATA[
+                    <span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class="math-super"><a id="z4" href="part0009.xhtml#bz4">4</a></span> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="span" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="span" rel="parent"/>
+                    <dom tag-name="p" rel="parent.parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[  <p class="x-c"><span class="no-style-override"><a id="link_99" href="part0029.html#link_98" class="calibre10">[1]</a> 角动量（angular momentum）：。</span></p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx9" >
+            <expression>
+                <![CDATA[
+                    <span\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup></a\s*>\s*(<br class="\w+"/>)?</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class="no-style-override7"><a id="link_35" href="part0013.html#link_34" class="calibre6"><sup class="calibre5">[3]</sup></a><br class="calibre3"/></span> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="sup" rel="$sup"/>
+                <dom tag-name="span" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href"  />
+                    <dom tag-name="span" rel="parent"/>
+                    <dom tag-name="p" rel="parent.parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[ ]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx10" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*</a>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a></a><a></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id"/>
+                <dom tag-name="a" rel="nextElementSibling" attr="href" />
+                <dom tag-name="small" rel="parent"/>
+                <dom tag-name="sup" rel="parent.parent" append="true" remove="true" text="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id"  />
+                    <dom tag-name="a" rel="nextElementSibling" attr="href"/>
+                    <dom tag-name="p" rel="parent" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx11" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="small" attr="id"/>
+                <dom tag-name="a" rel="$a" attr="href"/>
+                <dom tag-name="sup" rel="parent" append="true" remove="true" text="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx12" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s*(\w+\s*=\s*\"(.*?)\")*\s*>[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</span>\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a><span></span></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="sup" rel="parent" append="true" remove="true" text="true"/>
+                <dom tag-name="small" attr="id"/>
+                <dom tag-name="a" rel="$a" attr="href"/>
+                <dom tag-name="span" rel="$span"/>
+
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx13" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</span>\s*</span>\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a><span></span></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="sup" rel="parent" append="true" remove="true" text="true"/>
+                <dom tag-name="small" attr="id"/>
+                <dom tag-name="a" rel="$a" attr="href"/>
+                <dom tag-name="span" rel="$span"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx14" >
+            <expression>
+                <![CDATA[
+                    <a\s+((id|href)\s*=\s*\"(.*?)\")+\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</a>
+                ]]>
+            </expression>
+            <href-expression>
+                <![CDATA[ .+#b-\d+ ]]>
+            </href-expression>
+            <example>
+                <![CDATA[ <a id="" href=""></a>]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" append="true" remove="true" text="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" text="true" rel="parent" remove="true" append="true"/>
+                    <dom tag-name="a" attr="id,href" />
+                </doms>
+                <example>
+                    <![CDATA[<p class="bodycontent-text"><a href="part0187.html#a-1" id="b-1">[1]</a>大洞镇（Michel Delving）</p> ]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx15" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<small\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<span\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*[\u2460-\u24FF\u3251-\u325F]\s*[）)\]］】]?\s*</span>\s*</a\s*>\s*</small>\s*</sup>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <sup><small><a><span><span>1</span></span></a></small></sup>]]>
+            </example>
+            <doms>
+                <dom tag-name="sup" rel="parent" append="true" remove="true" text="true"/>
+                <dom tag-name="small" attr="id"/>
+                <dom tag-name="a" rel="$a" attr="href"/>
+                <dom tag-name="span" rel="$span"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" text="true" remove="true" append="true"/>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                </doms>
+                <example>
+                    <![CDATA[<p><a id="note29n" href="part0023.xhtml#note29">[2]</a> 巴吞鲁日：美国路易斯安那州首府。——译者注</p>]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx16" >
+            <expression>
+                <![CDATA[
+                    <span[^<>]*?>\s*<span[^<>]*?>\s*<a[^<>]*?>\s*\d+\s*</a\s*>\s*</span\s*>\s*</span\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <span class=""><span id=""><a class="" href="">1</a></span></span>]]>
+            </example>
+            <doms>
+                <dom tag-name="a" rel="$a" attr="href" text="true"/>
+                <dom tag-name="span"  attr="id"/>
+                <dom tag-name="span" rel="parent" remove="true" append="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                    <dom tag-name="div" attr="id" text="true" remove="true" append="true"/>
+                </doms>
+                <example>
+                    <![CDATA[]]>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx17" >
+            <expression>
+                <![CDATA[
+                    <a[^<>]*?>\s*<sup[^<>]*?>\s*注\d+\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[
+                    <a id="zww33" href="part0041.xhtml#zw33"><sup>注33</sup></a
+                ]]>
+            </example>
+            <doms>
+                <dom tag-name="a"  attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                    <dom tag-name="p" text="true" rel="parent"/>
+                </doms>
+                <example>
+                    <![CDATA[]]>
+                </example>
+            </footnote>
+        </index>
+
+
+        <index id="idx18" >
+            <expression>
+                <![CDATA[
+                    <sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*<a\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*[\d注]+\s*[）)\]］】]?\s*</a\s*>\s*</sup\s*>
+                ]]>
+            </expression>
+            <example>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href"  />
+                <dom tag-name="sup" text="true" rel="parent" append="true" remove="true"/>
+            </doms>
+
+            <footnote >
+                <doms>
+                    <dom tag-name="p" attr="id" remove="true" text="true" append="true"/>
+                    <dom tag-name="sup" rel="$sup"/>
+                    <dom tag-name="a" rel="$a" attr="href"/>
+                </doms>
+                <example>
+                </example>
+            </footnote>
+        </index>
+
+        <index id="idx19" >
+            <expression>
+                <![CDATA[
+                    <a\s+(\w+\s*=\s*\"(.*?)\")*\s*>\s*<sup\s*(\w+\s*=\s*\"(.*?)\")*\s*>\s*[\[【［（(]?\s*\d+\s*[）)\]］】]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="a" attr="href" rel="$a"/>
+                    <dom tag-name="p" attr="id" remove="true" append="true" text="true"/>
+                </doms>
+            </footnote>
+        </index>
+
+        <index id="idx20" >
+            <expression>
+                <![CDATA[
+                    <a[^<>]*?>\s*<sup[^<>]*?>\s*[\u2460-\u24FF]?\s*</sup\s*>\s*</a\s*>
+                ]]>
+            </expression>
+            <example>
+                <![CDATA[ <a id="j2" href="part0054.html#j2"><sup class="calibre16">【2】</sup></a> ]]>
+            </example>
+            <doms>
+                <dom tag-name="a" attr="id,href" remove="true" append="true"/>
+                <dom tag-name="sup" text="true" rel="$sup"/>
+            </doms>
+
+            <footnote id="ft2">
+                <doms>
+                    <dom tag-name="div" text="true" remove="true" append="true" rel="parent"/>
+                    <dom tag-name="a" attr="id,href"/>
+                </doms>
+            </footnote>
+        </index>
+
+    </indices>
+    <footnotes>
+        <footnote>
+
+        </footnote>
+    </footnotes>
+</formats>
